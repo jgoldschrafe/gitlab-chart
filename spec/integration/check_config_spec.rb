@@ -479,4 +479,69 @@ describe 'checkConfig template' do
                      success_description: 'when Redis is set to install with a single Redis instance',
                      error_description: 'when Redis is set to install with multiple Redis instances'
   end
+
+  describe 'appConfig.storage.enabled', :focus => true  do
+    context 'set to true' do
+      let(:success_values) do
+        YAML.load(<<-EOS
+          global:
+            appConfig:
+              storage:
+                enabled: true
+            minio:
+              enabled: false
+          EOS
+        ).merge(default_required_values)
+      end
+      let(:error_values) do
+        YAML.load(<<-EOS
+          global:
+            appConfig:
+              storage:
+                enabled: true
+            minio:
+              enabled: true
+          EOS
+        ).merge(default_required_values)
+      end
+
+      let (:error_output) { 'If configuring consolidated storage, you can not use the in-chart minio storage' }
+
+      include_examples 'config validation',
+                       success_description: 'when minio is disabled',
+                       error_description: 'when minio id enabled'
+    end
+
+    context 'set to false' do
+      let(:success_values) do
+        YAML.load(<<-EOS
+          global:
+            appConfig:
+              storage:
+                enabled: false
+            minio:
+              enabled: true
+          EOS
+        ).merge(default_required_values)
+      end
+      let(:error_values) do
+        YAML.load(<<-EOS
+          global:
+            appConfig:
+              storage:
+                enabled: false
+            minio:
+              enabled: false
+          EOS
+        ).merge(default_required_values)
+      end
+
+      let (:error_output) { 'Storage must configured to use in-chart minio or consolidated storage' }
+
+      include_examples 'config validation',
+                       success_description: 'when minio is enabled',
+                       error_description: 'when minio is disabled'
+    end
+  end
+
 end

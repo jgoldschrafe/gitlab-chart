@@ -173,6 +173,20 @@ global:
     serviceDeskEmail:
       enabled: false
       address:
+    storage:
+      enabled: false
+      provider: AWS
+      connection:
+        region:
+        secret:
+        key:
+      buckets:
+        lfs:
+        artifacts:
+        uploads:
+        packages:
+        externalDiffs:
+        terraformState:
     lfs:
       enabled: true
       proxy_download: true
@@ -293,7 +307,7 @@ serviceAccount:
   create: false
   annotations: {}
   ## Name to be used for serviceAccount, otherwise defaults to chart fullname
-  # name: 
+  # name:
 
 ## Allow configuring pods' priorityClassName. This is used to control pod priority in case of eviction:
 #  https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/

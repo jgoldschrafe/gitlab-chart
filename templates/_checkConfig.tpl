@@ -41,6 +41,7 @@ Due to gotpl scoping, we can't make use of `range`, so we have to add action lin
 {{- $messages := append $messages (include "gitlab.checkConfig.serviceDesk" .) -}}
 {{- $messages := append $messages (include "gitlab.checkConfig.sentry" .) -}}
 {{- $messages := append $messages (include "gitlab.checkConfig.registry.notifications" .) -}}
+{{- $messages := append $messages (include "gitlab.checkConfig.storage.enabled" .) -}}
 {{- /* prepare output */}}
 {{- $messages := without $messages "" -}}
 {{- $message := join "\n" $messages -}}
@@ -201,7 +202,7 @@ redis:
 {{/* END gitlab.checkConfig.multipleRedis */}}
 
 {{/*
-Ensure that `global.redis.host: <hostname>` is present if `redis.install: false` 
+Ensure that `global.redis.host: <hostname>` is present if `redis.install: false`
 */}}
 {{- define "gitlab.checkConfig.hostWhenNoInstall" -}}
 {{-   if and (not .Values.redis.install) (not .Values.global.redis.host) }}
@@ -336,3 +337,19 @@ Registry: Notifications should be defined in the global scope. Use `global.regis
 {{- end -}}
 {{- end -}}
 {{/* END gitlab.checkConfig.registryl.notifications */}}
+
+
+{{/*
+Ensure object storage settings are set and not mutually exclusive
+*/}}
+{{- define "gitlab.checkConfig.storage.enabled" }}
+{{-   if (and $.Values.global.appConfig.storage.enabled $.Values.global.minio.enabled ) }}
+Storage:
+    If configuring consolidated storage, you can not use the in-chart minio storage
+{{-   end -}}
+{{-   if (not (or $.Values.global.appConfig.storage.enabled $.Values.global.minio.enabled )) }}
+Storage:
+    Storage must configured to use in-chart minio or consolidated storage
+{{-   end -}}
+{{- end -}}
+{{/* END gitlab.checkConfig.storage.enabled */}}
