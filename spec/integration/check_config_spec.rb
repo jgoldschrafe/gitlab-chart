@@ -532,6 +532,13 @@ describe 'checkConfig template' do
                 enabled: false
             minio:
               enabled: false
+          gitlab:
+            task-runner:
+              backups:
+                objectStorage:
+                  config:
+                    secret: aSecret
+                    key: aKey
           EOS
         ).merge(default_required_values)
       end
