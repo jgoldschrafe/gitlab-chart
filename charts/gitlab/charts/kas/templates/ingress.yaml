@@ -1,4 +1,5 @@
 {{- if .Values.enabled -}}
+{{- if eq (include "gitlab.ingress.enabled" $) "true" -}}
 {{- $gitlabHostname := include "gitlab.gitlab.hostname" . -}}
 {{- $tlsSecret := include "webservice.tlsSecret" . -}}
 apiVersion: extensions/v1beta1
@@ -33,4 +34,5 @@ spec:
   {{- else }}
   tls: []
   {{- end }}
+{{- end -}}
 {{- end -}}
