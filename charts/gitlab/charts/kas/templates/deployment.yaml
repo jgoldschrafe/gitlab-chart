@@ -28,15 +28,7 @@ spec:
       containers:
         - name: {{ template "name" . }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          env:
-            - name: GITALY_TOKEN
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "gitlab.gitaly.authToken.secret" . }}
-                  key: {{ template "gitlab.gitaly.authToken.key" . }}
           args:
-            - "--gitaly-token=$(GITALY_TOKEN)"
-            - "--gitaly-address=tcp://gitlab-gitaly.{{ .Release.Namespace }}:8075"
             - "--gitlab-address=http://$(GITLAB_WEBSERVICE_SERVICE_HOST):$(GITLAB_WEBSERVICE_SERVICE_PORT_HTTP_WORKHORSE)"
             - "--listen-address=:{{ .Values.service.internalPort }}"
             - "--listen-websocket=true"
