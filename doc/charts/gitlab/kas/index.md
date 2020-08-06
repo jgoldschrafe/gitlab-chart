@@ -30,16 +30,16 @@ the `helm install` command using the `--set` flags.
 | Parameter                | Default        | Description                      |
 | ------------------------ | -------------- | ---------------------------------|
 | `annotations`            | `{}`           | Pod annotations                  |
-| `enabled`                | `false`        | installs / uninstalls `kas`      |
+| `enabled`                | `false`        | Installs / uninstalls `kas`      |
 | `image.repository`       | `registry.gitlab.com/gitlab-org/cluster-integration/gitlab-agent/kas` | image repository |
-| `image.tag`              | `latest-race`  | image tag                        |
+| `image.tag`              | `latest-race`  | Image tag                        |
 | `hpa.targetAverageValue` | `100m`         | Set the autoscaling target value (cpu) |
-| `ingress.annotations`    | `{}`           | ingress annotations              |
-| `ingress.tls`            | `{}`           | ingress tls configuration        |
+| `ingress.annotations`    | `{}`           | Ingress annotations              |
+| `ingress.tls`            | `{}`           | Ingress tls configuration        |
 | `maxReplicas`            | `10`           | HPA `maxReplicas`                |
 | `maxUnavailable`         | `1`            | HPA `maxUnavailable`             |
 | `minReplicas`            | `2`            | HPA `maxReplicas`                |
-| `serviceAccount.annotations` | `{}`       | service account annotations      |
-| `service.externalPort`   | `5005`         | external port                    |
-| `service.internalPort`   | `5005`         | internal port                    |
-| `service.type`           | `ClusterIP`    | service type                     |
+| `serviceAccount.annotations` | `{}`       | Service account annotations      |
+| `service.externalPort`   | `5005`         | External port                    |
+| `service.internalPort`   | `5005`         | Internal port                    |
+| `service.type`           | `ClusterIP`    | Service type                     |
