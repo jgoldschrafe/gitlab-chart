@@ -61,12 +61,25 @@ data:
         ssl_url: {{ .gravatar.sslUrl }}
       {{- include "gitlab.appConfig.extra" . | nindent 6 }}
       {{- end }}
-      {{- include "gitlab.appConfig.artifacts.configuration" (dict "config" $.Values.global.appConfig.artifacts "context" $) | nindent 6 }}
-      {{- include "gitlab.appConfig.lfs.configuration" (dict "config" $.Values.global.appConfig.lfs "context" $) | nindent 6 }}
-      {{- include "gitlab.appConfig.uploads.configuration" (dict "config" $.Values.global.appConfig.uploads "context" $) | nindent 6 }}
-      {{- include "gitlab.appConfig.packages.configuration" (dict "config" $.Values.global.appConfig.packages "context" $) | nindent 6 }}
-      {{- include "gitlab.appConfig.external_diffs.configuration" (dict "config" $.Values.global.appConfig.externalDiffs "context" $) | nindent 6 }}
-      {{- include "gitlab.appConfig.terraformState.configuration" (dict "config" $.Values.global.appConfig.terraformState "context" $) | nindent 6 }}
+      {{- if .Values.global.appConfig.storage.connection }}
+      object_store:
+        enabled: true
+        {{- include "gitlab.appConfig.objectStorage.connection" $ | nindent 8 }}
+        objects:
+          {{- include "gitlab.appConfig.objectStorage.object" (dict "name" "artifacts" "config" $.Values.global.appConfig.artifacts) | nindent 12 -}}
+          {{- include "gitlab.appConfig.objectStorage.object" (dict "name" "lfs" "config" $.Values.global.appConfig.lfs) | nindent 12 -}}
+          {{- include "gitlab.appConfig.objectStorage.object" (dict "name" "uploads" "config" $.Values.global.appConfig.uploads) | nindent 12 -}}
+          {{- include "gitlab.appConfig.objectStorage.object" (dict "name" "packages" "config" $.Values.global.appConfig.packages) | nindent 12 -}}
+          {{- include "gitlab.appConfig.objectStorage.object" (dict "name" "external_diffs" "config" $.Values.global.appConfig.externalDiffs) | nindent 12 -}}
+          {{- include "gitlab.appConfig.objectStorage.object" (dict "name" "terraform_state" "config" $.Values.global.appConfig.terraformState) | nindent 12 -}}
+      {{- else }}
+        {{- include "gitlab.appConfig.artifacts.configuration" (dict "config" $.Values.global.appConfig.artifacts "context" $) | nindent 6 }}
+        {{- include "gitlab.appConfig.lfs.configuration" (dict "config" $.Values.global.appConfig.lfs "context" $) | nindent 6 }}
+        {{- include "gitlab.appConfig.uploads.configuration" (dict "config" $.Values.global.appConfig.uploads "context" $) | nindent 6 }}
+        {{- include "gitlab.appConfig.packages.configuration" (dict "config" $.Values.global.appConfig.packages "context" $) | nindent 6 }}
+        {{- include "gitlab.appConfig.external_diffs.configuration" (dict "config" $.Values.global.appConfig.externalDiffs "context" $) | nindent 6 }}
+        {{- include "gitlab.appConfig.terraformState.configuration" (dict "config" $.Values.global.appConfig.terraformState "context" $) | nindent 6 }}
+      {{- end }}
       {{- include "gitlab.geo.config" $ | nindent 6 }}
       {{- include "gitlab.appConfig.sentry.configuration" $ | nindent 6 }}
       pages:
