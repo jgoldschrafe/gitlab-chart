@@ -174,19 +174,11 @@ global:
       enabled: false
       address:
     storage:
-      enabled: false
-      provider: AWS
       connection:
-        region:
-        secret:
-        key:
-      buckets:
-        lfs:
-        artifacts:
-        uploads:
-        packages:
-        externalDiffs:
-        terraformState:
+        provider: AWS
+        aws_access_key_id: AWS_ACCESS_KEY_ID
+        aws_secret_access_key: AWS_SECRET_ACCESS_KEY
+        region: us-east-1
     lfs:
       enabled: true
       proxy_download: true
