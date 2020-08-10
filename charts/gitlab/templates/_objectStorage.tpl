@@ -33,8 +33,8 @@ connection:
   endpoint: {{ template "gitlab.minio.endpoint" .context }}
   path_style: true
   {{- else }}
-  provider: {{ .context.Values.global.storage.connection.provider }}
-  region: {{ .context.Values.global.storage.connetion.region }}
+  provider: {{ .context.Values.global.appConfig.storage.connection.provider }}
+  region: {{ .context.Values.global.appConfig.storage.connection.region }}
 
   {{- end }}
   aws_secret_access_key: "<%= File.read('/etc/gitlab/minio/secretkey').strip.dump[1..-2] %>"
