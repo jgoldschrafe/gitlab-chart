@@ -64,14 +64,14 @@ data:
       {{- if .Values.global.appConfig.storage.connection }}
       object_store:
         enabled: true
-        {{- include "gitlab.appConfig.objectStorage.connection" $ | nindent 8 }}
+        {{- include "gitlab.appConfig.objectStorage.connection" (dict "config" $.Values.global.appConfig.artifacts "context" $) | nindent 8 }}
         objects:
-          {{- include "gitlab.appConfig.objectStorage.object" (dict "name" "artifacts" "config" $.Values.global.appConfig.artifacts) | nindent 12 -}}
-          {{- include "gitlab.appConfig.objectStorage.object" (dict "name" "lfs" "config" $.Values.global.appConfig.lfs) | nindent 12 -}}
-          {{- include "gitlab.appConfig.objectStorage.object" (dict "name" "uploads" "config" $.Values.global.appConfig.uploads) | nindent 12 -}}
-          {{- include "gitlab.appConfig.objectStorage.object" (dict "name" "packages" "config" $.Values.global.appConfig.packages) | nindent 12 -}}
-          {{- include "gitlab.appConfig.objectStorage.object" (dict "name" "external_diffs" "config" $.Values.global.appConfig.externalDiffs) | nindent 12 -}}
-          {{- include "gitlab.appConfig.objectStorage.object" (dict "name" "terraform_state" "config" $.Values.global.appConfig.terraformState) | nindent 12 -}}
+          {{- include "gitlab.appConfig.objectStorage.object" (dict "name" "artifacts" "config" $.Values.global.appConfig.artifacts) | nindent 10 -}}
+          {{- include "gitlab.appConfig.objectStorage.object" (dict "name" "lfs" "config" $.Values.global.appConfig.lfs) | nindent 10 -}}
+          {{- include "gitlab.appConfig.objectStorage.object" (dict "name" "uploads" "config" $.Values.global.appConfig.uploads) | nindent 10 -}}
+          {{- include "gitlab.appConfig.objectStorage.object" (dict "name" "packages" "config" $.Values.global.appConfig.packages) | nindent 10 -}}
+          {{- include "gitlab.appConfig.objectStorage.object" (dict "name" "external_diffs" "config" $.Values.global.appConfig.externalDiffs) | nindent 10 -}}
+          {{- include "gitlab.appConfig.objectStorage.object" (dict "name" "terraform_state" "config" $.Values.global.appConfig.terraformState) | nindent 10 -}}
       {{- else }}
         {{- include "gitlab.appConfig.artifacts.configuration" (dict "config" $.Values.global.appConfig.artifacts "context" $) | nindent 6 }}
         {{- include "gitlab.appConfig.lfs.configuration" (dict "config" $.Values.global.appConfig.lfs "context" $) | nindent 6 }}
