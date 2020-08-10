@@ -70,12 +70,11 @@ to the `helm install` command using the `--set` flags:
 | `resources.requests.memory`          | `600M`            | Sidekiq minimum needed memory            |
 | `timeout`                            | `5`               | Sidekiq job timeout                      |
 | `tolerations`                        | `[]`              | Toleration labels for pod assignment     |
-| `memoryKiller.daemonMode`            | `false`           | If `true` enables daemon memory killer mode |
 | `memoryKiller.maxRss`                | `2000000`         | Maximum RSS before delayed shutdown triggered expressed in kilobytes |
 | `memoryKiller.graceTime`             | `900`             | Time to wait before a triggered shutdown expressed in seconds|
 | `memoryKiller.shutdownWait`          | `30`              | Amount of time after triggered shutdown for existing jobs to finish expressed in seconds |
 | `memoryKiller.hardLimitRss`          |                   | Maximum RSS before immediate shutdown triggered expressed in kilobyte in daemon mode |
-| `memoryKiller.checkInterval`         | `3`               | Amount of time between memory checks in daemon mode |
+| `memoryKiller.checkInterval`         | `3`               | Amount of time between memory checks     |
 | `livenessProbe.initialDelaySeconds`  | 20                | Delay before liveness probe is initiated                                                              |
 | `livenessProbe.periodSeconds`        | 60                | How often to perform the liveness probe                                                               |
 | `livenessProbe.timeoutSeconds`       | 30                | When the liveness probe times out                                                                     |

@@ -201,7 +201,7 @@ spec:
             - name: SIDEKIQ_NEGATE_QUEUES
               value: {{ default $.Values.negateQueues .negateQueues | quote }}
             - name: SIDEKIQ_DAEMON_MEMORY_KILLER
-              value: {{ int $.Values.memoryKiller.daemonMode | quote }}
+              value: "1"
             - name: SIDEKIQ_MEMORY_KILLER_CHECK_INTERVAL
               value: {{ int $.Values.memoryKiller.checkInterval | quote }}
             - name: SIDEKIQ_MEMORY_KILLER_MAX_RSS

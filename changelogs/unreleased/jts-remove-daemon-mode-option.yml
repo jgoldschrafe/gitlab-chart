@@ -1,0 +1,5 @@
+---
+title: Removes daemonMode option for Memory Killer
+merge_request: 2246
+author:
+type: removed
