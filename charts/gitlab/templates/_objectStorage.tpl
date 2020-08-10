@@ -19,22 +19,26 @@ object_store:
   {{- if .config.connection }}
   connection: <%= YAML.load_file("/etc/gitlab/objectstorage/{{ .name }}").to_json() %>
   {{- else if .context.Values.global.minio.enabled }}
-    {{- include "gitlab.appConfig.objectStorage.connection" . }}
+  {{- include "gitlab.appConfig.objectStorage.connection" . | nindent 2 }}
   {{- end -}}
 {{- end -}}{{/* "gitlab.appConfig.objectStorage.configuration" */}}
 
 
 {{- define "gitlab.appConfig.objectStorage.connection" -}}
 connection:
+  {{- if .context.Values.global.minio.enabled }}
   provider: AWS
   region: "us-east-1"
-  aws_access_key_id: "<%= File.read('/etc/gitlab/minio/accesskey').strip.dump[1..-2] %>"
-  aws_secret_access_key: "<%= File.read('/etc/gitlab/minio/secretkey').strip.dump[1..-2] %>"
-  {{- if "" }}
   host: {{ template "gitlab.minio.hostname" .context }}
   endpoint: {{ template "gitlab.minio.endpoint" .context }}
   path_style: true
+  {{- else }}
+  provider: {{ .context.Values.global.storage.connection.provider }}
+  region: {{ .context.Values.global.storage.connetion.region }}
+
   {{- end }}
+  aws_secret_access_key: "<%= File.read('/etc/gitlab/minio/secretkey').strip.dump[1..-2] %>"
+  aws_access_key_id: "<%= File.read('/etc/gitlab/minio/accesskey').strip.dump[1..-2] %>"
 {{- end }}
 
 
