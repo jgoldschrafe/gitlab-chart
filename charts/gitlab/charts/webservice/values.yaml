@@ -42,6 +42,17 @@ metrics:
     prometheus.io/scrape: "true"
     prometheus.io/port: "8080"
     prometheus.io/path: "/-/metrics"
+
+networkpolicy:
+  enabled: false
+  egress:
+    enabled: false
+    rules: []
+  ingress:
+    enabled: false
+    rules: []
+  annotations: {}
+
 service:
   type: ClusterIP
   externalPort: 8080
