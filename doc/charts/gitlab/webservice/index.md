@@ -411,7 +411,7 @@ exporter if enabled and traffic coming from the NGINX Ingress, and normally
 requires Egress connections to various places. This examples adds the following
 network policy:
 
-- All Ingress requests from the network on TCP `10.0.0.0/8` port 8080 are allowed for metrics exporting and nginx Ingress
+- All Ingress requests from the network on TCP `10.0.0.0/8` port 8080 are allowed for metrics exporting and NGINX Ingress
 - All Egress requests to the network on UDP `10.0.0.0/8` port 53 are allowed for DNS
 - All Egress requests to the network on TCP `10.0.0.0/8` port 5432 are allowed for PostgreSQL
 - All Egress requests to the network on TCP `10.0.0.0/8` port 6379 are allowed for Redis
