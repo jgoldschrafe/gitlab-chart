@@ -407,7 +407,7 @@ Pods to specific endpoints.
 ### Example Network Policy
 
 The webservice service requires Ingress connections for only the Prometheus
-exporter if enabled and traffic coming from the nginx Ingress, and normally
+exporter if enabled and traffic coming from the NGINX Ingress, and normally
 requires Egress connections to various places. This examples adds the following
 network policy:
 
