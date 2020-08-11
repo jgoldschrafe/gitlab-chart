@@ -174,11 +174,12 @@ global:
       enabled: false
       address:
     storage:
-      connection:
-        provider: AWS
-        aws_access_key_id: AWS_ACCESS_KEY_ID
-        aws_secret_access_key: AWS_SECRET_ACCESS_KEY
-        region: us-east-1
+      connection: {}
+        # provider: AWS
+        # region: us-east-1
+        # secret:
+        # secret_key:
+        # access_key:
     lfs:
       enabled: true
       proxy_download: true
