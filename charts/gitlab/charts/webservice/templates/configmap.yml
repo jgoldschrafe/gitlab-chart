@@ -64,7 +64,7 @@ data:
       {{- if .Values.global.appConfig.storage.connection }}
       object_store:
         enabled: true
-        {{- include "gitlab.appConfig.objectStorage.connection" (dict "config" $.Values.global.appConfig.artifacts "context" $) | nindent 8 }}
+        {{- include "gitlab.appConfig.objectStorage.connection" (dict "config" $.Values.global.appConfig.storage.connection "context" $) | nindent 8 }}
         objects:
           {{- include "gitlab.appConfig.objectStorage.object" (dict "name" "artifacts" "config" $.Values.global.appConfig.artifacts) | nindent 10 -}}
           {{- include "gitlab.appConfig.objectStorage.object" (dict "name" "lfs" "config" $.Values.global.appConfig.lfs) | nindent 10 -}}
