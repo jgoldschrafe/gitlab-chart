@@ -18,7 +18,7 @@ should first purge the failed install before installing again.
 helm uninstall <release-name>
 ```
 
-NOTE: **Note**:
+NOTE: **Note:**
 With Helm v2, the uninstall command would be `helm delete --purge <release-name>`.
 
 If instead, the initial install command timed out, but GitLab still came up successfully,
@@ -41,7 +41,7 @@ example, `Test Username` is the culprit:
 helm upgrade gitlab gitlab/gitlab --timeout 600s --set global.email.display_name=Test Username ...
 ```
 
-NOTE: **Note**:
+NOTE: **Note:**
 If using Helm v2, please see notes about the `--timeout` option
 in the [Deployment documentation](../installation/deployment.md#deploy-using-helm).
 
@@ -143,12 +143,10 @@ This can happen when you have TLS termination before the NGINX Ingress, and the 
    helm ... --set-string global.ingress.annotations."nginx.ingress.kubernetes.io/ssl-redirect"=false
    ```
 
-1. Apply the change
+1. Apply the change.
 
->>>
-**NOTE:**
+NOTE: **Note:**
 When using an external service for SSL termination, that service is responsible for redirecting to https (if so desired).
->>>
 
 ## Upgrades fail with Immutable Field Error
 
@@ -176,7 +174,10 @@ This can be solved by simply removing all of the affected services.
 1. Perform an upgrade via Helm.
 1. Future upgrades will not face this error.
 
-NOTE: **Note:** This will change any dynamic value for the `LoadBalancer` for NGINX Ingress from this chart, if in use. See [global Ingress settings documentation](../charts/globals.md#configure-ingress-settings) for more details regarding `externalIP`. You may be required to update DNS records!
+NOTE: **Note:**
+This will change any dynamic value for the `LoadBalancer` for NGINX Ingress from this chart, if in use.
+See [global Ingress settings documentation](../charts/globals.md#configure-ingress-settings) for more
+details regarding `externalIP`. You may be required to update DNS records!
 
 ### spec.selector
 

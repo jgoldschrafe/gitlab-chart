@@ -8,7 +8,8 @@ info: To determine the technical writer assigned to the Stage/Group associated w
 
 This is the official, recommended, and supported method to install GitLab on a cloud native environment.
 
-NOTE: **Note:** It is not necessary to have GitLab installed on Kubernetes in order to use
+NOTE: **Note:**
+It is not necessary to have GitLab installed on Kubernetes in order to use
 the [GitLab Kubernetes integration](https://docs.gitlab.com/ee/user/project/clusters/).
 
 ## Introduction
@@ -43,7 +44,7 @@ can be installed separately.
 
 Some features of GitLab are not currently available using the Helm chart:
 
-- [GitLab Pages](https://gitlab.com/gitlab-org/charts/gitlab/-/issues/37)
+- [GitLab Pages](https://gitlab.com/gitlab-org/charts/gitlab/-/issues/37) as part of the chart or in a hybrid environment
 - [Smartcard authentication](https://gitlab.com/gitlab-org/charts/gitlab/-/issues/988)
 
 Database limitations:
@@ -200,7 +201,7 @@ helm repo add gitlab https://charts.gitlab.io/
 helm search repo -l gitlab/gitlab
 ```
 
-NOTE: **Note**
+NOTE: **Note:**
 With Helm v2, the search command would be `helm search -l gitlab/gitlab`
 
 For more information, visit the [version mappings docs](installation/version_mappings.md).

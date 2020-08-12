@@ -27,6 +27,10 @@ global:
       #   https://github.com/helm/helm/issues/3805
       autoPause: true
 
+  ## Supplemental Pod labels. Will not be used for selectors.
+  pod:
+    labels: {}
+
   ## doc/installation/deployment.md#deploy-the-community-edition
   edition: ee
 

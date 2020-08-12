@@ -28,6 +28,13 @@ class HelmTemplate
                             chdir: File.join(__dir__,  '..'),
                             stdin_data: YAML.dump(values))
     @stdout, @stderr, @exit_code = result
+    # handle common failures when helm or chart not setup properly
+    case @exit_code
+    when 256
+      if @stderr.include? 'found in Chart.yaml, but missing in charts/ directory'
+        fail "Chart dependencies not installed, run 'helm dependency update'"
+      end
+    end
     # load the complete output's YAML documents into an array
     yaml = YAML.load_stream(@stdout)
     # filter out any empty YAML documents (nil)

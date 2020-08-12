@@ -282,7 +282,8 @@ kubectl create secret generic ldap-main-password --from-literal=password=yourpas
 Then use `--set global.appConfig.ldap.servers.main.password.secret=ldap-main-password` to
 inject the password into your configuration.
 
-NOTE: **Note** Use the `Secret` name, not the _actual password_ when configuring the Helm property.
+NOTE: **Note:**
+Use the `Secret` name, not the _actual password_ when configuring the Helm property.
 
 ### SMTP password
 
@@ -295,7 +296,8 @@ kubectl create secret generic smtp-password --from-literal=password=yourpassword
 
 Then use `--set global.smtp.password.secret=smtp-password` in your Helm command.
 
-NOTE: **Note** Use the `Secret` name, not the _actual password_ when configuring the Helm property.
+NOTE: **Note:**
+Use the `Secret` name, not the _actual password_ when configuring the Helm property.
 
 ### IMAP password for incoming emails
 
@@ -309,7 +311,8 @@ kubectl create secret generic incoming-email-password --from-literal=password=yo
 Then use `--set global.appConfig.incomingEmail.password.secret=incoming-email-password`
 in your Helm command along with other required settings as specified [in the docs](command-line-options.md#incoming-email-configuration).
 
-NOTE: **Note** Use the `Secret` name, not the _actual password_ when configuring the Helm property.
+NOTE: **Note:**
+Use the `Secret` name, not the _actual password_ when configuring the Helm property.
 
 ### IMAP password for service desk emails
 
@@ -323,7 +326,8 @@ kubectl create secret generic service-desk-email-password --from-literal=passwor
 Then use `--set global.appConfig.serviceDeskEmail.password.secret=service-desk-email-password`
 in your Helm command along with other required settings as specified [in the docs](command-line-options.md#service-desk-email-configuration).
 
-NOTE: **Note** Use the `Secret` name, not the _actual password_ when configuring the Helm property.
+NOTE: **Note:**
+Use the `Secret` name, not the _actual password_ when configuring the Helm property.
 
 ### S/MIME Certificate
 

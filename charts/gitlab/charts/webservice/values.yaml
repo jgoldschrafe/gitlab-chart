@@ -34,6 +34,8 @@ shutdown:
 
 annotations: {}
 
+podLabels: {}
+
 metrics:
   enabled: true
   annotations:
@@ -270,7 +272,7 @@ trusted_proxies: []
 resources:
   # limits:
   #  cpu: 1.5
-  #  memory: 2G
+  #  memory: 2.5G
   requests:
     cpu: 300m
     memory: 1.5G

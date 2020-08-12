@@ -30,17 +30,23 @@ Most MacOS systems use `en0` as the primary interface. If using a system with a 
 
 It is considered best practice to install applications in namespaces other than `default`. You can create a namespace using `kubectl create namespace (some name)`, and then add on `--namespace (some name)` to future `kubectl` commands. If you don't want to type that repeatedly, check out `kubens` from the [kubectx](https://github.com/ahmetb/kubectx) project.
 
-### Installing kubectl
+### Installing dependencies
 
-To install `kubectl`, you can follow the instructions [here](../../installation/tools.md#kubectl).
+You can use `asdf` ([more info](../index.md#common-developer-tools)) to install the following tools:
 
-### Installing Helm
+- `kubectl`
+- `helm`
+- `kind`
 
-To install `helm`, you can follow the instructions [here](https://github.com/helm/helm#install).
+Note that `kind` uses Docker to run local Kubernetes clusters, so be sure to [install Docker](https://docs.docker.com/get-docker/).
 
-### Installing KinD
+### Obtaining configuration examples
 
-To install `kind`, you can follow the instructions [here](https://github.com/kubernetes-sigs/kind#installation-and-usage).
+Clone the GitLab Chart repository for local copies of the configuration example files referenced in the next steps:
+
+```shell
+git clone https://gitlab.com/gitlab-org/charts/gitlab.git
+```
 
 ### Adding GitLab Helm chart
 
@@ -51,44 +57,30 @@ helm repo add gitlab https://charts.gitlab.io/
 helm repo update
 ```
 
+### Clone the GitLab chart repository
+
+The following instructions use files in the [GitLab Chart repository](https://gitlab.com/gitlab-org/charts/gitlab). Be sure to have it cloned locally and navigate to the repository root in your shell.
+
+### Enter your host domain
+
+With the GitLab chart repository cloned, open `examples/kind/values-base.yaml` and replace `(your host IP)` with the value obtained [above](#required-information) under `global.hosts.domain`.
+
 ## Deployment options
 
 Select from one of the following deployment options based on your needs.
-
-### Port-forwarding
-
-In this method, we will use `kubectl` to port-forward the NGINX Controller service locally.
-
-NOTE: **Note:**
-If you are on Linux, this option should work well as the containers run directly on your machine. In MacOS, Docker runs in a VM, so extra steps are required to expose the services correctly.
-
-First, open `examples/kind/values-port-forward.yaml` and set `global.hosts.domain` to `(your host IP).nip.io`. Then run these commands:
-
-```shell
-kind create cluster --config examples/kind/kind-port-forward.yaml
-helm upgrade --install gitlab gitlab/gitlab -f examples/kind/values-port-forward.yaml
-sudo kubectl port-forward --address (your host IP) service/gitlab-nginx-ingress-controller 443:443
-```
-
-You can now access GitLab at `https://gitlab.(your host IP).nip.io`
-
-NOTE: **Note:**
-We use `sudo` in the `kubectl port-forward` command because elevated privileges are required to host on port 443 locally. We need to host on port 443 if we want the runner to connect successfully (note that the runner will only connect once the port-forward is initiated).
 
 ### NGINX Ingress NodePort with SSL
 
 In this method, we will use `kind` to expose the NGINX controller service's NodePorts to ports on your local machine with SSL enabled.
 
-First, open `examples/kind/values-ssl.yaml` and set `global.hosts.domain` to `(your host IP).nip.io`. Then, follow these commands:
-
 ```shell
 kind create cluster --config examples/kind/kind-ssl.yaml
-helm upgrade --install gitlab gitlab/gitlab -f examples/kind/values-ssl.yaml
+helm upgrade --install gitlab gitlab/gitlab -f examples/kind/values-base.yaml -f examples/kind/values-ssl.yaml
 ```
 
 You can then access GitLab at `https://gitlab.(your host IP).nip.io`.
 
-### (Optional) Add root CA
+#### (Optional) Add root CA
 
 In order for your browser to trust our self-signed certificate, download the root CA and trust it:
 
@@ -99,26 +91,28 @@ kubectl get secret gitlab-wildcard-tls-ca -ojsonpath='{.data.cfssl_ca}' | base64
 Now that the root CA is downloaded, you can add it to your local chain (instructions vary per platform and are readily available online).
 
 NOTE: **Note:**
-If you would prefer not to run GitLab Runner at all, you can disable it in the relevant values file: `gitlab-runner.install=false`.
-
-NOTE: **Note:**
 If you need to log into the registry with `docker login`, you will need to take additional steps to configure the registry to work with your self-signed certificates. More instructions can be found [here](https://docs.docker.com/registry/deploying/#run-an-externally-accessible-registry) and [here](https://blog.container-solutions.com/adding-self-signed-registry-certs-docker-mac).
 
-## NGINX Ingress NodePort without SSL
+### NGINX Ingress NodePort without SSL
 
 In this method, we will use `kind` to expose the NGINX controller service's NodePorts to ports on your local machine with SSL disabled.
 
-First, open `examples/kind/values-no-ssl.yaml` and set `global.hosts.domain` to `(your host IP).nip.io`:
-
 ```shell
 kind create cluster --config examples/kind/kind-no-ssl.yaml
-helm upgrade --install gitlab gitlab/gitlab -f examples/kind/values-no-ssl.yaml
+helm upgrade --install gitlab gitlab/gitlab -f examples/kind/values-base.yaml -f examples/kind/values-no-ssl.yaml
 ```
 
 Access GitLab at `http://gitlab.(your host IP).nip.io`.
 
 NOTE: **Note:**
 If you need to log into the registry with `docker login`, you will need to tell Docker to [trust your insecure registry](https://docs.docker.com/registry/insecure/#deploy-a-plain-http-registry).
+
+### Handling DNS
+
+This guide assumes you have network access to [nip.io](https://nip.io). If this is not available to you, please refer to the [handling DNS](../minikube/index.md#handling-dns) section in the Minikube documentation which will also work for KinD.
+
+NOTE: Note:
+When editing **/etc/hosts**, remember to use the [host computer's IP address](#required-information) rather than the output of `$(minikube ip)`.
 
 ## Cleaning up
 

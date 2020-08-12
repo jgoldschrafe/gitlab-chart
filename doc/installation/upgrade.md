@@ -92,11 +92,19 @@ backup.
 
 ### Prepare the existing database
 
-NOTE: **Note:** If you are not using the bundled PostgreSQL chart (`postgresql.install` is false), you do not need to perform this step.
+Note the following:
 
-NOTE: **Note:** If you have multiple charts installed in the same namespace. It may be necessary to pass the Helm release name to the database-upgrade script as well. Replace `bash -s STAGE` with `bash -s -- -r RELEASE STAGE` in the example commands provided later.
-
-NOTE: **Note:** If you installed a chart to a namespace other than your `kubectl` context's default, you must pass the namespace to the database-upgrade script. Replace `bash -s STAGE` with `bash -s -- -n NAMESPACE STAGE` in the example commands provided later. This option can be used along with `-r RELEASE`. You can set the context's default namespace by running `kubectl config set-context --current --namespace=NAMESPACE`, or using [`kubens` from kubectx](https://github.com/ahmetb/kubectx)
+- If you are not using the bundled PostgreSQL chart (`postgresql.install` is false), you do not need
+  to perform this step.
+- If you have multiple charts installed in the same namespace. It may be necessary to pass the Helm
+  release name to the database-upgrade script as well. Replace `bash -s STAGE` with
+  `bash -s -- -r RELEASE STAGE` in the example commands provided later.
+- If you installed a chart to a namespace other than your `kubectl` context's default, you must pass
+  the namespace to the database-upgrade script. Replace `bash -s STAGE` with
+  `bash -s -- -n NAMESPACE STAGE` in the example commands provided later. This option can be used
+  along with `-r RELEASE`. You can set the context's default namespace by running
+  `kubectl config set-context --current --namespace=NAMESPACE`, or using
+  [`kubens` from kubectx](https://github.com/ahmetb/kubectx).
 
 The `pre` stage will create a backup of your database using the backup-utility script in the task-runner pod, which gets saved to the configured s3 bucket (MinIO by default):
 
@@ -107,7 +115,8 @@ curl -s https://gitlab.com/gitlab-org/charts/gitlab/raw/${GITLAB_RELEASE}/script
 
 ### Delete existing PostgreSQL data
 
-NOTE: **Note:** If you are not using the bundled PostgreSQL chart (`postgresql.install` is false), you do not need to perform this step.
+NOTE: **Note:**
+If you are not using the bundled PostgreSQL chart (`postgresql.install` is false), you do not need to perform this step.
 
 CAUTION: **Caution:**
 Ensure that you have created a database backup in the previous step. Without a backup, GitLab data will be lost.
@@ -133,9 +142,12 @@ We will perform the migrations for the Database in a later step for the bundled 
 
 ### Restore the Database
 
-NOTE: **Note:** If you are not using the bundled PostgreSQL chart (`postgresql.install` is false), you do not need to perform this step.
+Note the following:
 
-NOTE: **Note:** You'll need to be using Bash 4.0 or above to run the script successfully as it requires the use of bash associative arrays.
+- If you are not using the bundled PostgreSQL chart (`postgresql.install` is false), you do not need
+  to perform this step.
+- You'll need to be using Bash 4.0 or above to run the script successfully as it requires the use of
+  bash associative arrays.
 
 1. Wait for the upgrade to complete for the task-runner pod. RELEASE_NAME should be the name of the GitLab release from `helm list`
 
@@ -182,11 +194,19 @@ backup.
 
 ### Prepare the existing database
 
-NOTE: **Note:** If you are not using the bundled PostgreSQL chart (`postgresql.install` is false), you do not need to perform this step.
+Note the following:
 
-NOTE: **Note:** If you have multiple charts installed in the same namespace. It may be necessary to pass the Helm release name to the database-upgrade script as well. Replace `bash -s STAGE` with `bash -s -- -r RELEASE STAGE` in the example commands provided later.
-
-NOTE: **Note:** If you installed a chart to a namespace other than your `kubectl` context's default, you must pass the namespace to the database-upgrade script. Replace `bash -s STAGE` with `bash -s -- -n NAMESPACE STAGE` in the example commands provided later. This option can be used along with `-r RELEASE`. You can set the context's default namespace by running `kubectl config set-context --current --namespace=NAMESPACE`, or using [`kubens` from kubectx](https://github.com/ahmetb/kubectx)
+- If you are not using the bundled PostgreSQL chart (`postgresql.install` is false), you do not need
+  to perform this step.
+- If you have multiple charts installed in the same namespace. It may be necessary to pass the Helm
+  release name to the database-upgrade script as well. Replace `bash -s STAGE` with
+  `bash -s -- -r RELEASE STAGE` in the example commands provided later.
+- If you installed a chart to a namespace other than your `kubectl` context's default, you must pass
+  the namespace to the database-upgrade script. Replace `bash -s STAGE` with
+  `bash -s -- -n NAMESPACE STAGE` in the example commands provided later. This option can be used
+  along with `-r RELEASE`. You can set the context's default namespace by running
+  `kubectl config set-context --current --namespace=NAMESPACE`, or using
+  [`kubens` from kubectx](https://github.com/ahmetb/kubectx).
 
 The `pre` stage will create a backup of your database using the backup-utility script in the task-runner pod, which gets saved to the configured s3 bucket (MinIO by default):
 
@@ -250,9 +270,12 @@ We will perform the migrations for the Database in a later step for the bundled 
 
 ### Restore the Database
 
-NOTE: **Note:** If you are not using the bundled PostgreSQL chart (`postgresql.install` is false), you do not need to perform this step.
+Note the following:
 
-NOTE: **Note:** You'll need to be using Bash 4.0 or above to run the script successfully as it requires the use of bash associative arrays.
+- If you are not using the bundled PostgreSQL chart (`postgresql.install` is false), you do not need
+  to perform this step.
+- You'll need to be using Bash 4.0 or above to run the script successfully as it requires the use of
+  bash associative arrays.
 
 1. Wait for the upgrade to complete for the task-runner pod. RELEASE_NAME should be the name of the GitLab release from `helm list`
 

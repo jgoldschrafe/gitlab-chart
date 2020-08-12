@@ -30,7 +30,6 @@ nginx-ingress:
 # Save resources, only 2 CPU
 prometheus:
   install: false
-# GitLab Runner isn't a big fan of self-signed certificates
 gitlab-runner:
   install: false
 # Reduce replica counts, reducing CPU & memory requirements

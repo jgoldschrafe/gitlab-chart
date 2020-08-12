@@ -20,7 +20,7 @@ The `migrations` creates a new migrations [Job](https://kubernetes.io/docs/conce
 
 For now we also have the jobs remain as objects in the cluster after they complete. This is so we can observe the migration logs. Currently this means these Jobs persist even after a `helm uninstall`. This is one of the reasons why we append random text to the Job name, so that future deployments using the same release name don't cause conflicts. Once we have some form of log-shipping in place, we can revisit the persistence of these objects.
 
-NOTE: **Note**:
+NOTE: **Note:**
 If using Helm v2, the uninstall command would be `helm delete --purge`.
 
 The container used in this chart has some additional optimizations that we are not currently using in this Chart. Mainly the ability to quickly skip running migrations if they are already up to date, without needing to boot up the rails application to check. This optimization requires us to persist the migration status. Which we are not doing with this chart at the moment. In the future we will introduce storage support for the migrations status to this chart.
@@ -44,6 +44,7 @@ Table below contains all the possible charts configurations that can be supplied
 | `enabled`                   | Migrations enable flag                   | `true`            |
 | `tolerations`               | Toleration labels for pod assignment     | `[]`              |
 | `annotations`               | Annotations for the job spec             | `{}`              |
+| `podLabels`                 | Supplemental Pod labels. Will not be used for selectors. |   |
 | `redis.serviceName`         | Redis service name                       | `redis`           |
 | `psql.serviceName`          | Name of Service providing PostgreSQL     | `release-postgresql` |
 | `psql.password.secret`      | psql secret                              | `gitlab-postgres` |

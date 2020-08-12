@@ -24,7 +24,7 @@ To use an external database with the `gitlab` chart, there are a few prerequisit
 1. A [Kubernetes Secret](https://kubernetes.io/docs/concepts/configuration/secret/) with the password for the user above.
 1. Ensure that the database is reachable from the cluster. Be sure firewall policies are in place to allow traffic.
 
-NOTE: **Note**:
+NOTE: **Note:**
 The `pg_trgm` and `btree_gist` extensions need to be added to the GitLab
 database. This means that the `CREATE EXTENSION` command should be executed
 while connected to the GitLab database (by default named `gitlabhq_production`)

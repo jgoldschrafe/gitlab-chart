@@ -237,7 +237,7 @@ postgresql:
    helm upgrade --install gitlab-geo gitlab/gitlab -f primary.yaml
    ```
 
-   NOTE: **Note**:
+   NOTE: **Note:**
    With Helm v2, one may need to specify the namespace that the release was
    deployed to with the `--namespace <namespace>` option.
 
@@ -541,7 +541,7 @@ postgresql:
    helm upgrade --install gitlab-geo gitlab/gitlab -f secondary.yaml
    ```
 
-   NOTE: **Note**:
+   NOTE: **Note:**
    With Helm v2, one may need to specify the namespace that the release was
    deployed to with the `--namespace <namespace>` option.
 

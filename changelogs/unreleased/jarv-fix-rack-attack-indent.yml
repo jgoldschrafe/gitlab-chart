@@ -1,0 +1,5 @@
+---
+title: Fix misaligned indent for rack_attack
+merge_request:
+author:
+type: fixed

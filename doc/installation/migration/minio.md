@@ -53,7 +53,8 @@ task-runner pods. Follow the steps to grab it from the Sidekiq pod
 1. Use this information to configure object storage in `/etc/gitlab/gitlab.rb`
    file of Omnibus GitLab package-based deployment, as detailed in the [docs](https://docs.gitlab.com/ee/administration/uploads.html#s3-compatible-connection-settings).
 
-   **Note:** For connecting to the MinIO service from outside the cluster, the
+   NOTE: **Note:**
+   For connecting to the MinIO service from outside the cluster, the
    MinIO host URL alone is enough. Helm charts based installations are
    configured to redirect requests coming to that URL automatically to the
    corresponding endpoint. So, you need not set `endpoint` value in your

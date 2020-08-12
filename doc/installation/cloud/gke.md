@@ -10,7 +10,8 @@ For a fully functional GitLab instance, you will need a few resources before
 deploying the `gitlab` chart. The following is how these charts are deployed
 and tested within GitLab.
 
-NOTE: **Note:** Google provides a whitepaper for [deploying production-ready GitLab on
+NOTE: **Note:**
+Google provides a whitepaper for [deploying production-ready GitLab on
 Google Kubernetes Engine](https://cloud.google.com/solutions/deploying-production-ready-gitlab-on-gke), including all steps and external
 resource configuration. These are alternative to this document, and the
 deployed chart will behave slightly differently. For example, the default
@@ -52,6 +53,7 @@ The table below describes all variables.
 | MACHINE_TYPE    | The cluster instances' type                                                 | `n1-standard-4`                    |
 | NUM_NODES       | The number of nodes required.                                               | 2                                |
 | PROJECT         | the id of your GCP project                                                  | No defaults, required to be set. |
+| ADMIN_USER      | The user to assign cluster-admin access to during setup                     | current gcloud user              |
 | RBAC_ENABLED    | If you know whether your cluster has RBAC enabled set this variable.        | true                             |
 | PREEMPTIBLE     | Cheaper, clusters live at *most* 24 hrs. No SLA on nodes/disks              | false                            |
 | USE_STATIC_IP   | Create a static IP for GitLab instead of an ephemeral IP with managed DNS   | false                            |

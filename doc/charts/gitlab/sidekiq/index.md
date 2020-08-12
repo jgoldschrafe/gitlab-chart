@@ -40,6 +40,7 @@ to the `helm install` command using the `--set` flags:
 | Parameter                            | Default           | Description                              |
 | ------------------------------------ | ----------------- | ---------------------------------------- |
 | `annotations`                        |                   | Pod annotations                          |
+| `podLabels`                          |                   | Supplemental Pod labels. Will not be used for selectors. |
 | `concurrency`                        | `25`              | Sidekiq default concurrency              |
 | `cluster`                            | `true`            | [See below](#cluster).                   |
 | `enabled`                            | `true`            | Sidekiq enabled flag                     |
@@ -323,9 +324,10 @@ on a per-pod basis.
 | `maxReplicas`               | Integer | `10`      | Maximum number of replicas |
 | `maxUnavailable`            | Integer | `1`       | Limit of maximum number of Pods to be unavailable |
 
-NOTE: **Note**: [Detailed documentation of the Sidekiq memory killer is
-  available](https://docs.gitlab.com/ee/administration/operations/sidekiq_memory_killer.html#sidekiq-memorykiller)
-  in the Omnibus documentation.
+NOTE: **Note:**
+[Detailed documentation of the Sidekiq memory killer is
+available](https://docs.gitlab.com/ee/administration/operations/sidekiq_memory_killer.html#sidekiq-memorykiller)
+in the Omnibus documentation.
 
 ## Per-pod Settings
 
@@ -333,7 +335,8 @@ The `pods` declaration provides for the declaration of all attributes for a work
 pod. These will be templated to `Deployment`s, with individual `ConfigMap`s for their
 Sidekiq instances.
 
-NOTE: **Note**: The settings default to including a single pod that is set up to monitor
+NOTE: **Note:**
+The settings default to including a single pod that is set up to monitor
 all queues. Making changes to the pods section will *overwrite the default pod* with
 a different pod configuration. It will not add a new pod in addition to the default.
 
@@ -351,6 +354,7 @@ a different pod configuration. It will not add a new pod in addition to the defa
 | `minReplicas`  | Integer | `2`     | Minimum number of replicas |
 | `maxReplicas`  | Integer | `10`    | Maximum number of replicas |
 | `maxUnavailable` | Integer | `1`   | Limit of maximum number of Pods to be unavailable |
+| `podLabels`      | `{}`  | `{}`    | Supplemental Pod labels. Will not be used for selectors. |
 | `updateStrategy` |       | `{}`    | Allows one to configure the update strategy utilized by the deployment |
 | `extraVolumes` | String  |         | Configures extra volumes for the given pod. |
 | `extraVolumeMounts` | String |     | Configures extra volume mounts for the given pod. |
@@ -373,8 +377,8 @@ these files in the GitLab source:
 1. [`app/workers/all_queues.yml`](https://gitlab.com/gitlab-org/gitlab/-/blob/master/app/workers/all_queues.yml)
 1. [`ee/app/workers/all_queues.yml`](https://gitlab.com/gitlab-org/gitlab/-/blob/master/ee/app/workers/all_queues.yml)
 
-NOTE: **Note**: When [`cluster`](#cluster) is `false`, this must be an array of
-queue names as strings.
+NOTE: **Note:**
+When [`cluster`](#cluster) is `false`, this must be an array of queue names as strings.
 
 ### negateQueues
 
@@ -388,8 +392,8 @@ This is useful if you have a pod processing important queues, and another pod
 processing other queues: they can use the same list of queues, with one being in
 `queues` and the other being in `negateQueues`.
 
-NOTE: **Note**: `negateQueues` _should not_ be provided alongside `queues`, as
-it will have no effect.
+NOTE: **Note:**
+`negateQueues` _should not_ be provided alongside `queues`, as it will have no effect.
 
 ### cluster
 
@@ -405,7 +409,8 @@ not using Sidekiq Cluster, they must be an array of strings. The latter option
 will [not be supported from GitLab
 14.0](https://gitlab.com/gitlab-com/gl-infra/scalability/-/issues/337).
 
-NOTE: **Note**: Unlike in other installation methods, `cluster` will never start
+NOTE: **Note:**
+Unlike in other installation methods, `cluster` will never start
 more than one Sidekiq process inside a pod. To run additional Sidekiq processes,
 run additional pods.
 

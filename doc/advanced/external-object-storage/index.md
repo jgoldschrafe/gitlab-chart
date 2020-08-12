@@ -22,7 +22,8 @@ has been provided in the [examples](https://gitlab.com/gitlab-org/charts/gitlab/
 
 This documentation specifies usage of access and secret keys for AWS. It is also possible to use [IAM roles](aws-iam-roles.md).
 
-NOTE: **Note:** GitLab does not currently support using [Amazon KMS](https://aws.amazon.com/kms/)
+NOTE: **Note:**
+GitLab does not currently support using [Amazon KMS](https://aws.amazon.com/kms/)
 to encrypt data stored in S3 buckets. Adding KMS support is being discussed in
 [issue #1012](https://gitlab.com/gitlab-org/charts/gitlab/-/issues/1012).
 

@@ -26,7 +26,7 @@ info: To determine the technical writer assigned to the Stage/Group associated w
 
 ## Migration Steps
 
-CAUTION: **CAUTION:**
+CAUTION: **Caution:**
 JUnit test report artifact (`junit.xml.gz`) migration
 [is not supported](https://gitlab.com/gitlab-org/gitlab/-/issues/27698)
 by the `gitlab:artifacts:migrate` script below.
@@ -39,8 +39,9 @@ by the `gitlab:artifacts:migrate` script below.
       [artifacts](https://docs.gitlab.com/ee/administration/job_artifacts.html#s3-compatible-connection-settings)
       and [LFS](https://docs.gitlab.com/ee/workflow/lfs/lfs_administration.html#s3-for-omnibus-installations).
 
-      **`Note:`** This **must** be the same object storage service that the
-      Helm charts based deployment is connected to.
+      NOTE: **Note:**
+      This **must** be the same object storage service that the Helm charts based deployment is
+      connected to.
 
    1. Run reconfigure to apply the changes
 

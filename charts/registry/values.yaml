@@ -27,6 +27,8 @@ deployment:
     successThreshold: 1
     failureThreshold: 3
 
+podLabels: {}
+
 service:
   name: registry
   type: ClusterIP

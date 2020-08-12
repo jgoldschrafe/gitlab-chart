@@ -32,6 +32,7 @@ to the `helm install` command using the `--set` flags.
 | Parameter                        | Default               | Description                                    |
 | -------------------------------- | --------------------- | ---------------------------------------------- |
 | `annotations`                    |                       | Pod annotations                                |
+| `podLabels`                      |                       | Supplemental Pod labels. Will not be used for selectors. |
 | `deployment.livenessProbe.initialDelaySeconds`  | 20     | Delay before liveness probe is initiated       |
 | `deployment.livenessProbe.periodSeconds`        | 60     | How often to perform the liveness probe        |
 | `deployment.livenessProbe.timeoutSeconds`       | 30     | When the liveness probe times out              |
@@ -245,7 +246,8 @@ can be customized using the `unicorn.memory.min` and `unicorn.memory.max` chart 
 default values are sane, you can increase (or lower) these values to fine-tune
 them for your environment or troubleshoot performance issues.
 
-NOTE: **Note:** These settings are effective on a _per process basis_, not for an entire Pod.
+NOTE: **Note:**
+These settings are effective on a _per process basis_, not for an entire Pod.
 
 ### Memory requests/limits
 

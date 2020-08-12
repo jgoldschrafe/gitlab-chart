@@ -109,6 +109,7 @@ If you chose to deploy this chart as a standalone, remove the `registry` at the 
 | Parameter                                  | Default                                      | Description                                                                                          |
 |--------------------------------------------|----------------------------------------------|------------------------------------------------------------------------------------------------------|
 | `annotations`                              |                                              | Pod annotations                                                                                      |
+| `podLabels`                                |                                              | Supplemental Pod labels. Will not be used for selectors.                                             |
 | `authAutoRedirect`                         | `true`                                       | Auth auto-redirect (must be true for Windows clients to work)                                        |
 | `authEndpoint`                             | `global.hosts.gitlab.name`                   | Auth endpoint (only host and port)                                                                   |
 | `certificate.secret`                       | `gitlab-registry`                            | JWT certificate                                                                                      |
@@ -469,10 +470,11 @@ If you chose to use the `filesystem` driver:
 For the sake of resiliency and simplicity, it is recommended to make use of an
 external service, such as `s3`, `gcs`, `azure` or other compatible Object Storage.
 
-NOTE: **Note:** The chart will populate `delete.enabled: true` into this configuration
-  by default if not specified by the user. This keeps expected behavior in line with
-  the default use of MinIO, as well as the Omnibus GitLab. Any user provided value
-  will supersede this default.
+NOTE: **Note:**
+The chart will populate `delete.enabled: true` into this configuration
+by default if not specified by the user. This keeps expected behavior in line with
+the default use of MinIO, as well as the Omnibus GitLab. Any user provided value
+will supersede this default.
 
 ### debug
 

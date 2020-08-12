@@ -46,7 +46,7 @@ obj.dig('ConfigMap/test-gitaly', 'data', 'config.toml.erb')
 This will return the contents of the `config.toml.erb` file contained in the
 `test-gitaly` ConfigMap.
 
-NOTE: **Note**:
+NOTE: **Note:**
 Using the `HelmTemplate` class will always use the release name of "test"
 when executing the `helm template` command.
 

@@ -56,7 +56,7 @@ extra:
 rack_attack:
   git_basic_auth:
     {{- if .Values.rack_attack.git_basic_auth.enabled }}
-  {{- toYaml .Values.rack_attack.git_basic_auth | nindent 2 }}
+    {{- toYaml .Values.rack_attack.git_basic_auth | nindent 4 }}
     {{- end }}
 {{- end -}}
 

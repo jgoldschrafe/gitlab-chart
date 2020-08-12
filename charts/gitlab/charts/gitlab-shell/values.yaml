@@ -35,6 +35,7 @@ global: {}
 
 enabled: true
 annotations: {}
+podLabels: {}
 workhorse:
   # by default, Workhorse is a part of the webservice Pods / Service
   serviceName: webservice
